@@ -1,16 +1,14 @@
 <template>
   <div id="app">
-    <API/>
+    <API>BOO</API>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
 import API from "./components/Api.vue";
 export default {
   name: "app",
   components: {
-    HelloWorld,
     API
   }
 };
