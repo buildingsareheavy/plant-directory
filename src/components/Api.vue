@@ -25,7 +25,7 @@ export default {
         method: "get",
         baseURL: "https://trefle.io/api",
         headers: {
-          Authorization: "Bearer YVhSTmJqVWZZN2NJczZ0d3NKMHpMZz09"
+          Authorization: "Bearer TOKEN"
         }
       })
       .then(response => {
