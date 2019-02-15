@@ -25,13 +25,18 @@ export default {
         method: "get",
         baseURL: "https://trefle.io/api",
         headers: {
-          Authorization: "Bearer YVhSTmJqVWZZN2NJczZ0d3NKMHpMZz09"
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods":
+            "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+          Authorization: "Bearer" + "YVhSTmJqVWZZN2NJczZ0d3NKMHpMZz09"
         }
       })
       .then(response => {
         this.info = response.data.bpi;
       })
       .catch(error => {
+        // eslint-disable-next-line
         console.log(error);
         this.errored = true;
       })

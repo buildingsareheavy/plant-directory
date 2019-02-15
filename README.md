@@ -1,3 +1,3 @@
 # plant-directory
 
-Searchable plant directory using API calls
+Searchable plant directory using API calls.
