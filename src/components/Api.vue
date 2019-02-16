@@ -1,14 +1,20 @@
 <template>
   <div id="app">
     <h1>PLANTS!</h1>
-    <div v-for="(data, key) in info.data">
-      <div class="data">{{ data.Genus }}</div>
-      <div class="span">
-        <span v-html="data"></span>
+    <div v-for="(data) in info.data">
+      <div class="data data-all">
+        <div class="data">
+          <span class="name-science">Scientific Name:</span>
+          {{ data.Genus }} {{ data.Species }}
+        </div>
+        <div class="data" v-if="data.Common_Name">
+          <span class="name-common">Common Name:</span>
+          {{ data.Common_Name }}
+        </div>
+        <div class="data" v-else>
+          <span class="name-common-none">Common name doesn't exist</span>
+        </div>
       </div>
-      <div class="info">{{ data.Species }}</div>
-      <br>
-      <br>
     </div>
   </div>
 </template>
@@ -24,12 +30,11 @@ export default {
     };
   },
   mounted() {
-    let self = this;
     this.axios
-      .get("https://plantsdb.xyz/search?limit=10&fields=Genus,Species")
+      .get("https://plantsdb.xyz/search?limit=10")
       .then(response => (this.info = response.data))
       .catch(error => {
-        console.log(error);
+        // console.log(error);
         this.errored = true;
       })
       .finally(() => (this.loading = false));
@@ -37,15 +42,28 @@ export default {
 };
 </script>
 
-<style>
-.listing {
-  border: 1px solid black;
-}
-.another {
-  background: green;
+<style scoped lang="scss">
+.data-all {
+  margin: 2rem auto;
+  display: inline-block;
+  background: black;
 }
 
-.other {
-  background: yellow;
+.data {
+  padding: 0.5rem;
+  color: white;
+  span {
+    padding: 0.25rem 0.5rem;
+    color: black;
+  }
+}
+.name-science {
+  background: skyblue;
+}
+.name-common {
+  background: lightgreen;
+}
+.name-common-none {
+  background: tomato;
 }
 </style>
