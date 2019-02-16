@@ -1,24 +1,15 @@
 <template>
   <div id="app">
-    <p>Boo!</p>
-    <section v-if="errored">
-      <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
-    </section>
-
-    <section v-else>
-      <div v-if="loading">Loading...</div>
-
-      <div v-else v-for="count in data" class="listing">
-        <span class="another">
-          <!-- {{ Genus }} -->
-        </span>
-        <span class="other">
-          <span v-html="data"></span>
-          <!-- {{ Species }} -->
-        </span>
+    <h1>PLANTS!</h1>
+    <div v-for="(data, key) in info.data">
+      <div class="data">{{ data.Genus }}</div>
+      <div class="span">
+        <span v-html="data"></span>
       </div>
-      <p>Bottom</p>
-    </section>
+      <div class="info">{{ data.Species }}</div>
+      <br>
+      <br>
+    </div>
   </div>
 </template>
 
@@ -36,11 +27,7 @@ export default {
     let self = this;
     this.axios
       .get("https://plantsdb.xyz/search?limit=10&fields=Genus,Species")
-      .then(function(res) {
-        self.data = res.data;
-        console.log("Data:", res.data);
-        // this.info = response.data.bpi;
-      })
+      .then(response => (this.info = response.data))
       .catch(error => {
         console.log(error);
         this.errored = true;
