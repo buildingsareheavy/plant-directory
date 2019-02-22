@@ -1,21 +1,6 @@
 <template>
   <div id="app">
     <h1>PLANTS!</h1>
-    <div v-for="(data) in info.data">
-      <div class="data data-all">
-        <div class="data">
-          <span class="name-science">Scientific Name:</span>
-          {{ data.Genus }} {{ data.Species }}
-        </div>
-        <div class="data" v-if="data.Common_Name">
-          <span class="name-common">Common Name:</span>
-          {{ data.Common_Name }}
-        </div>
-        <div class="data" v-else>
-          <span class="name-common-none">Common name doesn't exist</span>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -31,7 +16,11 @@ export default {
   },
   mounted() {
     this.axios
-      .get("https://plantsdb.xyz/search?limit=10")
+      .get("https://trefle.io/api", {
+        params: {
+          key: "YVhSTmJqVWZZN2NJczZ0d3NKMHpMZz09"
+        }
+      })
       .then(response => (this.info = response.data))
       .catch(error => {
         // console.log(error);
